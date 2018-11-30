@@ -1,0 +1,9 @@
+# import * from './generated/prisma.graphql'
+
+type Mutation {
+	createDog(name: String!, breed: String, age: String): Dog!
+}
+
+type Query {
+	dogs: [Dog]
+}
