@@ -11,6 +11,12 @@
   "emmet.includeLanguages": {
     "javascript": "javascriptreact",
     "javascriptreact": "javascriptreact"
-    
-  } 
+
+  },
+  "prettier.arrayExpand": true,
+  "prettier.javascriptEnable": [
+    "javascript",
+    "javascriptreact"
+  ],
+
 }

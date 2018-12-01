@@ -41,3 +41,4 @@ class Dogs extends Component {
 }
 
 export default Dogs;
+export { ALL_DOGS_QUERY };
