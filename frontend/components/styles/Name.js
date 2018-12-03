@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Name = styled.h3`
+const Name = styled.p`
 	margin: 0 1rem;
 	text-align: center;
 	transform: skew(0deg) rotate(0deg);

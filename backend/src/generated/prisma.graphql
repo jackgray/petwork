@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/jack-gray/petwork/dev
-# timestamp: Wed Nov 28 2018 13:59:52 GMT-0500 (Eastern Standard Time)
+# timestamp: Sat Dec 01 2018 11:58:55 GMT-0500 (Eastern Standard Time)
 
 type AggregateDog {
   count: Int!
@@ -24,6 +24,7 @@ type Dog implements Node {
   gender: String
   image: String
   location: String
+  shelter: String
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -45,6 +46,7 @@ input DogCreateInput {
   gender: String
   image: String
   location: String
+  shelter: String
 }
 
 """An edge in a connection."""
@@ -71,6 +73,8 @@ enum DogOrderByInput {
   image_DESC
   location_ASC
   location_DESC
+  shelter_ASC
+  shelter_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -85,6 +89,7 @@ type DogPreviousValues {
   gender: String
   image: String
   location: String
+  shelter: String
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -135,6 +140,7 @@ input DogUpdateInput {
   gender: String
   image: String
   location: String
+  shelter: String
 }
 
 input DogUpdateManyMutationInput {
@@ -144,6 +150,7 @@ input DogUpdateManyMutationInput {
   gender: String
   image: String
   location: String
+  shelter: String
 }
 
 input DogWhereInput {
@@ -417,6 +424,46 @@ input DogWhereInput {
 
   """All values not ending with the given string."""
   location_not_ends_with: String
+  shelter: String
+
+  """All values that are not equal to given value."""
+  shelter_not: String
+
+  """All values that are contained in given list."""
+  shelter_in: [String!]
+
+  """All values that are not contained in given list."""
+  shelter_not_in: [String!]
+
+  """All values less than the given value."""
+  shelter_lt: String
+
+  """All values less than or equal the given value."""
+  shelter_lte: String
+
+  """All values greater than the given value."""
+  shelter_gt: String
+
+  """All values greater than or equal the given value."""
+  shelter_gte: String
+
+  """All values containing the given string."""
+  shelter_contains: String
+
+  """All values not containing the given string."""
+  shelter_not_contains: String
+
+  """All values starting with the given string."""
+  shelter_starts_with: String
+
+  """All values not starting with the given string."""
+  shelter_not_starts_with: String
+
+  """All values ending with the given string."""
+  shelter_ends_with: String
+
+  """All values not ending with the given string."""
+  shelter_not_ends_with: String
   createdAt: DateTime
 
   """All values that are not equal to given value."""

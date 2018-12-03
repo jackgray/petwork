@@ -15,7 +15,14 @@ class Dog extends Component {
 					<Card body>
 						<CardTitle>
 							<Name>
-								<Link href={{ pathname: '/dog', query: { id: dog.id } }}>
+								<Link
+									href={{
+										pathname: '/dog',
+										query: {
+											id: dog.id
+										}
+									}}
+								>
 									<a>{dog.name}</a>
 								</Link>
 							</Name>
