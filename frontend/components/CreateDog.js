@@ -11,6 +11,7 @@ const CREATE_DOG_MUTATION = gql`
 		$age: Int
 		$breed: String
 		$image: String
+		$largeImage: String
 		$location: String
 		$shelter: String
 	) {
@@ -19,6 +20,7 @@ const CREATE_DOG_MUTATION = gql`
 			age: $age
 			breed: $breed
 			image: $image
+			largeImage: $largeImage
 			location: $location
 			shelter: $shelter
 		) {
@@ -33,6 +35,7 @@ class CreateDog extends Component {
 		age: 11,
 		breed: 'Great Dane',
 		image: '',
+		largeImage: '',
 		location: 'Alaska',
 		shelter: 'LCHS'
 	};
@@ -61,6 +64,7 @@ class CreateDog extends Component {
 			}
 		);
 		const file = await res.json();
+		console.log(file);
 		this.setState({
 			image: file.secure_url,
 			largeImage: file.eager[0].secure_url

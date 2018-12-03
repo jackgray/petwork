@@ -11,8 +11,20 @@ type Mutation {
 		location: String
 		shelter: String
 	): Dog!
+	updateDog(
+		id: ID!
+		name: String!
+		age: Int
+		breed: String
+		gender: String
+		image: String
+		largeImage: String
+		location: String
+		shelter: String
+	): Dog!
 }
 
 type Query {
 	dogs: [Dog]
+	dog(where: DogWhereUniqueInput!): Dog
 }
