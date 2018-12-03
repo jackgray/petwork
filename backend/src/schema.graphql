@@ -5,9 +5,11 @@ type Mutation {
 		name: String!
 		age: Int
 		breed: String
+		gender: String
+		image: String
+		largeImage: String
 		location: String
 		shelter: String
-		image: String
 	): Dog!
 }
 

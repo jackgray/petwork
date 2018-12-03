@@ -11,6 +11,7 @@ type Dog {
 	breed: String
 	gender: String
 	image: String
+	largeImage: String
 	location: String
 	shelter: String
 	createdAt: DateTime!

@@ -1,9 +1,9 @@
 import Dog from '../components/Dog';
 
-const DogPage = (props) => (
+const DogsPage = (props) => (
 	<div>
-		<p>This is the dog page</p>
+		<p>This is the dogs page</p>
 	</div>
 );
 
-export default DogPage;
+export default DogsPage;

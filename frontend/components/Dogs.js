@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
-import DogCard from './DogCard';
+import Dog from './Dog';
 
 const ALL_DOGS_QUERY = gql`
 	query ALL_DOGS_QUERY {
@@ -27,7 +27,6 @@ class Dogs extends Component {
 	render() {
 		return (
 			<Center>
-				<p>Dogs go here</p>
 				<Query query={ALL_DOGS_QUERY}>
 					{({ data, error, loading }) => {
 						if (loading) return <p>Loading...</p>;
@@ -35,7 +34,7 @@ class Dogs extends Component {
 						return (
 							<DogsList>
 								{data.dogs.map((dog) => (
-									<DogCard dog={dog} key={dog.id} />
+									<Dog dog={dog} key={dog.id} />
 								))}
 							</DogsList>
 						);
