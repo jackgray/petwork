@@ -5,7 +5,7 @@ backend/generated
 .DS_Store
 *.log
 haters/
-frontend/.next/
+frontend/.next
 .build/
 layout.md
 variables.env
