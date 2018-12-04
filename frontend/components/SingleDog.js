@@ -12,7 +12,16 @@ const SingleDogStyles = styled.div`
 	display: grid;
 	grid-auto-columns: 1fr;
 	grid-auto-flow: column;
-	min-height: 80px;
+	min-height: 800px;
+	img {
+		width:100%;
+		height: 100%;
+		object-fit: contain;
+	}
+	.details {
+		margin: 3rem;
+		font-size: 2rem;
+	}
 `;
 
 const SINGLE_DOG_QUERY = gql`
@@ -41,7 +50,16 @@ class SingleDog extends Component {
 					const dog = data.dog;
 					return (
 						<SingleDogStyles>
+							<Head>
+								<title>Petwork | {dog.name}</title>
+							</Head>
 							<img src={dog.largeImage} alt={dog.name} />
+							<div>
+								<h2>{dog.name}</h2>
+								<p>{dog.age}</p>
+								<p>{dog.breed}</p>
+								<p>{dog.location}</p>
+							</div>
 						</SingleDogStyles>
 					);
 				}}
