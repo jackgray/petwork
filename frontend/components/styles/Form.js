@@ -61,8 +61,8 @@ const Form = styled.form`
 			display: block;
 			background-image: linear-gradient(
 				to right,
-				${(props) => props.theme.cream} 0%,
-				${(props) => props.theme.lightblue} 50%,
+				${(props) => props.theme.lightGrey} 0%,
+				${(props) => props.theme.lightRed} 50%,
 				#ff3019 100%
 			);
 		}

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Name from './styles/Name';
 import DogStyles from './styles/DogStyles';
 import PriceTag from './styles/PriceTag';
+import DeleteDog from './DeleteDog';
 
 class Dog extends Component {
 	render() {
@@ -32,6 +33,7 @@ class Dog extends Component {
 						<a>✏️</a>
 					</Link>
 					<button>❤️</button>
+					<DeleteDog id={dog.id}>✖️</DeleteDog>
 				</div>
 			</DogStyles>
 		);

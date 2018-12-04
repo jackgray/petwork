@@ -22,8 +22,8 @@ const SINGLE_DOG_QUERY = gql`
 
 const UPDATE_DOG_MUTATION = gql`
 	mutation UPDATE_DOG_MUTATION(
-		$id: ID!
-		$name: String!
+		$id: ID
+		$name: String
 		$age: Int
 		$breed: String
 		$image: String
@@ -75,6 +75,7 @@ class UpdateDog extends Component {
 				...this.state
 			}
 		});
+		console.log('Updated!');
 	};
 
 	uploadFile = async (e) => {

@@ -31,13 +31,13 @@ const CREATE_DOG_MUTATION = gql`
 
 class CreateDog extends Component {
 	state = {
-		name: 'Scooby',
-		age: 11,
-		breed: 'Great Dane',
+		name: '',
+		age: '',
+		breed: '',
 		image: '',
 		largeImage: '',
-		location: 'Alaska',
-		shelter: 'LCHS'
+		location: '',
+		shelter: ''
 	};
 	handleChange = (e) => {
 		const { name, type, value } = e.target;

@@ -12,8 +12,8 @@ type Mutation {
 		shelter: String
 	): Dog!
 	updateDog(
-		id: ID!
-		name: String!
+		id: ID
+		name: String
 		age: Int
 		breed: String
 		gender: String
@@ -22,6 +22,7 @@ type Mutation {
 		location: String
 		shelter: String
 	): Dog!
+	deleteDog(id: ID): Dog
 }
 
 type Query {

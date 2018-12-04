@@ -1,10 +1,10 @@
-import Dog from '../components/Dog';
+import SingleDog from '../components/SingleDog';
 
-const DogPage = (props) => (
+const Dog = (props) => (
 	<div>
 		<p>This is the dog page</p>
-		<Dog dog />
+		<SingleDog id={props.query.id} />
 	</div>
 );
 
-export default DogPage;
+export default Dog;

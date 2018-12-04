@@ -25,6 +25,14 @@ const Mutations = {
 			},
 			info
 		});
+	},
+	async deleteDog(parent, args, ctx, info) {
+		const where = { id: args.id };
+		//1. find the item
+		const dog = await ctx.db.query.dog({ where }, `{id name}`);
+		// check for permissions
+		// delete listing
+		return ctx.db.mutation.deleteDog({ where }, info);
 	}
 };
 

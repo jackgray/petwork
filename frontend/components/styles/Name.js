@@ -4,15 +4,15 @@ const Name = styled.p`
 	margin: 0 1rem;
 	text-align: center;
 	transform: skew(0deg) rotate(0deg);
-	margin-top: -9rem;
+	margin-top: -3rem;
 	text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
 	a {
-		background: ${(props) => props.theme.lightRed};
+		background: ;
 		display: inline;
 		line-height: 10;
-		font-size: 2rem;
+		font-size: 1rem;
 		text-align: center;
-		color: ${(props) => props.theme.cream};
+		color: ${(props) => props.theme.black};
 		padding: 0 1rem;
 	}
 `;
