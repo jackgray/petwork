@@ -2,7 +2,7 @@ import Dogs from '../components/Dogs';
 
 const Home = (props) => (
 	<div>
-		<Dogs />
+		<Dogs page={props.query.page} />
 	</div>
 );
 

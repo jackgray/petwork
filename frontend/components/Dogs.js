@@ -3,13 +3,17 @@ import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
 import Dog from './Dog';
+import Pagination from './Pagination';
 
 const ALL_DOGS_QUERY = gql`
 	query ALL_DOGS_QUERY {
 		dogs {
 			id
 			name
+			age
 			breed
+			image
+			largeImage
 		}
 	}
 `;
@@ -27,6 +31,7 @@ class Dogs extends Component {
 	render() {
 		return (
 			<Center>
+				<Pagination />
 				<Query query={ALL_DOGS_QUERY}>
 					{({ data, error, loading }) => {
 						if (loading) return <p>Loading...</p>;
@@ -40,6 +45,7 @@ class Dogs extends Component {
 						);
 					}}
 				</Query>
+				<Pagination />
 			</Center>
 		);
 	}

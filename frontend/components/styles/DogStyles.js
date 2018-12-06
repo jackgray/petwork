@@ -7,20 +7,22 @@ const Dog = styled.div`
 	position: relative;
 	display: flex;
 	flex-direction: column;
+	max-height: 275px;
 	img {
 		width: 100%;
-		height: 400px;
+		height: 200px;
 		object-fit: cover;
 	}
 	p {
 		font-size: 12px;
-		line-height: 15;
+		line-height: 0;
 		font-weight: 300;
 		flex-grow: 1;
-		padding: 0 3rem;
+		padding: 0 1rem;
 		font-size: 1.5rem;
 	}
 	.buttonList {
+		position: relative;
 		display: flex;
 		flex-direction: row;
 		justify-content: space-around;

@@ -11,7 +11,17 @@ class Dog extends Component {
 		const { dog } = this.props;
 		return (
 			<DogStyles>
-				{dog.image && <img src={dog.image} alt={dog.name} />}
+				<Link
+					href={{
+						pathname: '/dog',
+						query: { id: dog.id }
+					}}
+				>
+					<a href="">
+						{dog.image && <img src={dog.image} alt={dog.name} />}
+					</a>
+				</Link>
+
 				<Name>
 					<Link
 						href={{

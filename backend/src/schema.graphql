@@ -28,4 +28,5 @@ type Mutation {
 type Query {
 	dogs: [Dog]
 	dog(where: DogWhereUniqueInput!): Dog
+	dogsConnection(where: DogWhereInput): DogConnection!
 }

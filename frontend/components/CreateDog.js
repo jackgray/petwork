@@ -4,6 +4,7 @@ import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Form from './styles/Form';
 import Error from './ErrorMessage';
+import { ALL_DOGS_QUERY } from './Dogs';
 
 const CREATE_DOG_MUTATION = gql`
 	mutation CREATE_DOG_MUTATION(
@@ -71,9 +72,23 @@ class CreateDog extends Component {
 		});
 	};
 
+	update = (cache, payload) => {
+		// deleteDog removes listing from the SERVER
+		// udate will update the cache to sync the client side
+		// 1. Read the cache
+		const data = cache.readQuery({ query: ALL_DOGS_QUERY });
+		console.log(data);
+
+		cache.writeQuery({ query: ALL_DOGS_QUERY, data });
+	};
+
 	render() {
 		return (
-			<Mutation mutation={CREATE_DOG_MUTATION} variables={this.state}>
+			<Mutation
+				mutation={CREATE_DOG_MUTATION}
+				variables={this.state}
+				update={this.update}
+			>
 				{(createDog, { loading, error }) => (
 					<Form
 						onSubmit={async (e) => {
@@ -81,7 +96,7 @@ class CreateDog extends Component {
 							const res = await createDog();
 							console.log(res);
 							Router.push({
-								pathname: '/dog',
+								pathname: '/pets',
 								query: { id: res.data.createDog.id }
 							});
 						}}

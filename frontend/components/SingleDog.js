@@ -6,16 +6,18 @@ import Head from 'next/head';
 import Error from './ErrorMessage';
 
 const SingleDogStyles = styled.div`
-	max-width: 1200px;
+	max-width: 600px;
+	max-height: 100px;
 	margin: 2rem auto;
 	box-shadow: ${(props) => props.theme.bs}
 	display: grid;
 	grid-auto-columns: 1fr;
-	grid-auto-flow: column;
+	grid-auto-flow: row;
 	min-height: 800px;
 	img {
 		width:100%;
 		height: 100%;
+		max-height: 600px;
 		object-fit: contain;
 	}
 	.details {
@@ -55,10 +57,8 @@ class SingleDog extends Component {
 							</Head>
 							<img src={dog.largeImage} alt={dog.name} />
 							<div>
-								<h2>{dog.name}</h2>
+								<h2 className="details">{dog.name}</h2>
 								<p>{dog.age}</p>
-								<p>{dog.breed}</p>
-								<p>{dog.location}</p>
 							</div>
 						</SingleDogStyles>
 					);
