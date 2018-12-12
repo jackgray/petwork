@@ -15,6 +15,9 @@ const Name = styled.p`
 		color: ${(props) => props.theme.black};
 		padding: 0 1rem;
 	}
+	h6 {
+		text-align: left;
+	}
 `;
 
 export default Name;

@@ -2,93 +2,95 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import Name from './styles/Name';
-import DogStyles from './styles/DogStyles';
+import PetStyles from './styles/PetStyles';
 import PriceTag from './styles/PriceTag';
-import DeleteDog from './DeleteDog';
+import DeletePet from './DeletePet';
 
-class Dog extends Component {
+class Pet extends Component {
 	render() {
-		const { dog } = this.props;
+		const { pet } = this.props;
 		return (
-			<DogStyles>
+			<PetStyles>
 				<Link
 					href={{
-						pathname: '/dog',
-						query: { id: dog.id }
+						pathname: '/pet',
+						query: { id: pet.id }
 					}}
 				>
 					<a href="">
-						{dog.image && <img src={dog.image} alt={dog.name} />}
+						{pet.image && <img src={pet.image} alt={pet.name} />}
 					</a>
 				</Link>
 
 				<Name>
 					<Link
 						href={{
-							pathname: '/dog',
-							query: { id: dog.id }
+							pathname: '/pet',
+							query: { id: pet.id }
 						}}
 					>
-						<a href="">{dog.name}</a>
+						<a href="">{pet.name}</a>
 					</Link>
+					<h6>Age: {pet.age}</h6>
+					<h6>Breed: {pet.breed}</h6>
 				</Name>
-				<p>{dog.age}</p>
+
 				<div className="buttonList">
 					<Link
 						href={{
 							pathname: '/update',
-							query: { id: dog.id }
+							query: { id: pet.id }
 						}}
 					>
 						<a>✏️</a>
 					</Link>
 					<button>❤️</button>
-					<DeleteDog id={dog.id}>✖️</DeleteDog>
+					<DeletePet id={pet.id}>✖️</DeletePet>
 				</div>
-			</DogStyles>
+			</PetStyles>
 		);
 	}
 }
 
-export default Dog;
+export default Pet;
 
 /*
 
 
     render() {
-		const { dog } = this.props;
+		const { pet } = this.props;
 		return (
-			<DogStyles>
-				{dog.image && <img src={dog.image} alt={dog.name} />}
+			<PetStyles>
+				{pet.image && <img src={pet.image} alt={pet.name} />}
 				<Name>
 					<Link
 						href={{
-							pathname: '/dog',
-							query: { id: dog.id }
+							pathname: '/pet',
+							query: { id: pet.id }
 						}}
 					>
-						<a href="">{dog.name}</a>
+						<a href="">{pet.name}</a>
 					</Link>
 				</Name>
-				<p>{dog.age}</p>
+				<p>{pet.age}</p>
 				<div className="buttonList">
 					<Link
 						href={{
 							pathname: '/update',
-							query: { id: dog.id }
+							query: { id: pet.id }
 						}}
 					>
 						<a>✏️</a>
 					</Link>
 					<button>❤️</button>
 				</div>
-			</DogStyles>
+			</PetStyles>
 		);
 	}*/
 
 /*
 	render() {
-		const { dog } = this.props;
+		const { pet } = this.props;
 		return (
 			<Row>
 				<Col sm="6">
@@ -97,17 +99,17 @@ export default Dog;
 							<Name>
 								<Link
 									href={{
-										pathname: '/dog',
+										pathname: '/pet',
 										query: {
-											id: dog.id
+											id: pet.id
 										}
 									}}
 								>
-									<a>{dog.name}</a>
+									<a>{pet.name}</a>
 								</Link>
 							</Name>
 						</CardTitle>
-						<CardText>{dog.age}</CardText>
+						<CardText>{pet.age}</CardText>
 						<Button>❤️</Button>
 					</Card>
 				</Col>

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Head from 'next/head';
 import Error from './ErrorMessage';
 
-const SingleDogStyles = styled.div`
+const SinglePetStyles = styled.div`
 	max-width: 600px;
 	max-height: 100px;
 	margin: 2rem auto;
@@ -26,9 +26,9 @@ const SingleDogStyles = styled.div`
 	}
 `;
 
-const SINGLE_DOG_QUERY = gql`
-	query SINGLE_DOG_QUERY($id: ID!) {
-		dog(where: { id: $id }) {
+const SINGLE_PET_QUERY = gql`
+	query SINGLE_PET_QUERY($id: ID!) {
+		pet(where: { id: $id }) {
 			id
 			name
 			breed
@@ -40,27 +40,27 @@ const SINGLE_DOG_QUERY = gql`
 	}
 `;
 
-class SingleDog extends Component {
+class SinglePet extends Component {
 	render() {
 		return (
-			<Query query={SINGLE_DOG_QUERY} variables={{ id: this.props.id }}>
+			<Query query={SINGLE_PET_QUERY} variables={{ id: this.props.id }}>
 				{({ error, loading, data }) => {
 					if (error) return <Error error={error} />;
 					if (loading) return <p>Loading...</p>;
-					if (!data.dog)
-						return <p>Single Dog Component{this.props.id}</p>;
-					const dog = data.dog;
+					if (!data.pet)
+						return <p>Single Pet Component{this.props.id}</p>;
+					const pet = data.pet;
 					return (
-						<SingleDogStyles>
+						<SinglePetStyles>
 							<Head>
-								<title>Petwork | {dog.name}</title>
+								<title>Petwork | {pet.name}</title>
 							</Head>
-							<img src={dog.largeImage} alt={dog.name} />
+							<img src={pet.largeImage} alt={pet.name} />
 							<div>
-								<h2 className="details">{dog.name}</h2>
-								<p>{dog.age}</p>
+								<h2 className="details">{pet.name}</h2>
+								<p>{pet.age}</p>
 							</div>
-						</SingleDogStyles>
+						</SinglePetStyles>
 					);
 				}}
 			</Query>
@@ -68,5 +68,5 @@ class SingleDog extends Component {
 	}
 }
 
-export default SingleDog;
-export { SINGLE_DOG_QUERY };
+export default SinglePet;
+export { SINGLE_PET_QUERY };

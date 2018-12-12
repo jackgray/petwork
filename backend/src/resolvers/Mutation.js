@@ -1,8 +1,8 @@
 const Mutations = {
-	async createDog(parent, args, ctx, info) {
+	async createPet(parent, args, ctx, info) {
 		// TODO: check if user is logged in
 
-		const dog = await ctx.db.mutation.createDog(
+		const pet = await ctx.db.mutation.createPet(
 			{
 				data: {
 					...args
@@ -10,15 +10,15 @@ const Mutations = {
 			},
 			info
 		);
-		return dog;
+		return pet;
 	},
-	updateDog(parent, args, ctx, info) {
+	updatePet(parent, args, ctx, info) {
 		// make a copy of new fields
 		const updates = { ...args };
 		// remove ID from the updates (don't update ID)
 		delete updates.id;
 		// run update method
-		return ctx.db.mutation.updateDog({
+		return ctx.db.mutation.updatePet({
 			data: updates,
 			where: {
 				id: args.id
@@ -26,13 +26,13 @@ const Mutations = {
 			info
 		});
 	},
-	async deleteDog(parent, args, ctx, info) {
+	async deletePet(parent, args, ctx, info) {
 		const where = { id: args.id };
 		//1. find the item
-		const dog = await ctx.db.query.dog({ where }, `{id name}`);
+		const pet = await ctx.db.query.pet({ where }, `{id name}`);
 		// check for permissions
 		// delete listing
-		return ctx.db.mutation.deleteDog({ where }, info);
+		return ctx.db.mutation.deletePet({ where }, info);
 	}
 };
 

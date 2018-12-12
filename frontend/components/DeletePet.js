@@ -1,38 +1,38 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
-import { ALL_DOGS_QUERY } from './Dogs';
+import { ALL_PETS_QUERY } from './Pets';
 
-const DELTE_DOG_MUTATION = gql`
-	mutation DELTE_DOG_MUTATION($id: ID!) {
-		deleteDog(id: $id) {
+const DELTE_PET_MUTATION = gql`
+	mutation DELTE_PET_MUTATION($id: ID!) {
+		deletePet(id: $id) {
 			id
 		}
 	}
 `;
 
-class DeleteDog extends Component {
+class DeletePet extends Component {
 	update = (cache, payload) => {
-		// deleteDog removes listing from the SERVER
+		// deletePet removes listing from the SERVER
 		// udate will update the cache to sync the client side
 		// 1. Read the cache
-		const data = cache.readQuery({ query: ALL_DOGS_QUERY });
+		const data = cache.readQuery({ query: ALL_PETS_QUERY });
 		console.log(data);
 		// 2. Filter removed listing out of the page
-		data.dogs = data.dogs.filter(
-			(dog) => dog.id !== payload.data.deleteDog.id
+		data.pets = data.pets.filter(
+			(pet) => pet.id !== payload.data.deletePet.id
 		);
 		// 3. put the filtered data back
-		cache.writeQuery({ query: ALL_DOGS_QUERY, data });
+		cache.writeQuery({ query: ALL_PETS_QUERY, data });
 	};
 	render() {
 		return (
 			<Mutation
-				mutation={DELTE_DOG_MUTATION}
+				mutation={DELTE_PET_MUTATION}
 				variables={{ id: this.props.id }}
 				update={this.update}
 			>
-				{(deleteDog, { error }) => (
+				{(deletePet, { error }) => (
 					<button
 						onClick={() => {
 							if (
@@ -40,7 +40,7 @@ class DeleteDog extends Component {
 									'Are you sure you want to remove this listing?'
 								)
 							) {
-								deleteDog();
+								deletePet();
 							}
 						}}
 					>
@@ -52,4 +52,4 @@ class DeleteDog extends Component {
 	}
 }
 
-export default DeleteDog;
+export default DeletePet;

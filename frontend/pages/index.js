@@ -1,8 +1,8 @@
-import Dogs from '../components/Dogs';
+import Pets from '../components/Pets';
 
 const Home = (props) => (
 	<div>
-		<Dogs page={props.query.page} />
+		<Pets page={parseFloat(props.query.page) || 1} />
 	</div>
 );
 

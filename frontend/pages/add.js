@@ -1,12 +1,12 @@
 // react components imported automatically by next.js
 // by default next.js wraps entire application in a component
 
-import CreateDog from '../components/CreateDog';
+import CreatePet from '../components/CreatePet';
 
-const List = (props) => (
+const Add = (props) => (
 	<div>
-		<CreateDog />
+		<CreatePet />
 	</div>
 );
 
-export default List;
+export default Add;

@@ -5,9 +5,9 @@ import gql from 'graphql-tag';
 import Form from './styles/Form';
 import Error from './ErrorMessage';
 
-const SINGLE_DOG_QUERY = gql`
-	query SINGLE_DOG_QUERY($id: ID!) {
-		dog(where: { id: $id }) {
+const SINGLE_PET_QUERY = gql`
+	query SINGLE_PET_QUERY($id: ID!) {
+		pet(where: { id: $id }) {
 			id
 			name
 			age
@@ -20,8 +20,8 @@ const SINGLE_DOG_QUERY = gql`
 	}
 `;
 
-const UPDATE_DOG_MUTATION = gql`
-	mutation UPDATE_DOG_MUTATION(
+const UPDATE_PET_MUTATION = gql`
+	mutation UPDATE_PET_MUTATION(
 		$id: ID
 		$name: String
 		$age: Int
@@ -31,7 +31,7 @@ const UPDATE_DOG_MUTATION = gql`
 		$location: String
 		$shelter: String
 	) {
-		updateDog(
+		updatePet(
 			id: $id
 			name: $name
 			age: $age
@@ -53,7 +53,7 @@ const UPDATE_DOG_MUTATION = gql`
 	}
 `;
 
-class UpdateDog extends Component {
+class UpdatePet extends Component {
 	state = {};
 	handleChange = (e) => {
 		const { name, type, value } = e.target;
@@ -65,11 +65,11 @@ class UpdateDog extends Component {
 		this.setState({ [name]: val });
 	};
 
-	updateDog = async (e, updateDogMutation) => {
+	updatePet = async (e, updatePetMutation) => {
 		e.preventDefault();
-		console.log('Updating Dog');
+		console.log('Updating Pet');
 		console.log(this.state);
-		const res = await updateDogMutation({
+		const res = await updatePetMutation({
 			variables: {
 				id: this.props.id,
 				...this.state
@@ -103,22 +103,22 @@ class UpdateDog extends Component {
 
 	render() {
 		return (
-			<Query query={SINGLE_DOG_QUERY} variables={{ id: this.props.id }}>
+			<Query query={SINGLE_PET_QUERY} variables={{ id: this.props.id }}>
 				{({ data, loading }) => {
 					if (loading) return <p>Loading...</p>;
-					if (!data.dog)
+					if (!data.pet)
 						return (
-							<p>No dog found in database for {this.props.id}</p>
+							<p>No pet found in database for {this.props.id}</p>
 						);
 					return (
 						<Mutation
-							mutation={UPDATE_DOG_MUTATION}
+							mutation={UPDATE_PET_MUTATION}
 							variables={this.state}
 						>
-							{(updateDog, { loading, error }) => (
+							{(updatePet, { loading, error }) => (
 								<Form
 									onSubmit={(e) =>
-										this.updateDog(e, updateDog)}
+										this.updatePet(e, updatePet)}
 								>
 									<Error error={error} />
 									<fieldset
@@ -132,7 +132,7 @@ class UpdateDog extends Component {
 												id="file"
 												name="file"
 												placeholder="Upload an image"
-												deaultValue={data.dog.image}
+												deaultValue={data.pet.image}
 												onChange={this.uploadFile}
 											/>
 											{this.state.image && (
@@ -150,7 +150,7 @@ class UpdateDog extends Component {
 												id="name"
 												name="name"
 												placeholder="Name"
-												defaultValue={data.dog.name}
+												defaultValue={data.pet.name}
 												onChange={this.handleChange}
 											/>
 										</label>
@@ -162,7 +162,7 @@ class UpdateDog extends Component {
 												id="age"
 												name="age"
 												placeholder="Age"
-												defaultValue={data.dog.age}
+												defaultValue={data.pet.age}
 												onChange={this.handleChange}
 											/>
 										</label>
@@ -173,7 +173,7 @@ class UpdateDog extends Component {
 												id="breed"
 												name="breed"
 												placeholder="Breed"
-												defaultValue={data.dog.breed}
+												defaultValue={data.pet.breed}
 												onChange={this.handleChange}
 											/>
 										</label>
@@ -184,7 +184,7 @@ class UpdateDog extends Component {
 												id="location"
 												name="location"
 												placeholder="Location"
-												defaultValue={data.dog.location}
+												defaultValue={data.pet.location}
 												onChange={this.handleChange}
 											/>
 										</label>
@@ -202,5 +202,5 @@ class UpdateDog extends Component {
 	}
 }
 
-export default UpdateDog;
-export { UPDATE_DOG_MUTATION };
+export default UpdatePet;
+export { UPDATE_PET_MUTATION };

@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
-const Dog = styled.div`
+const Pet = styled.div`
 	background: white;
 	border: 1px solid ${(props) => props.theme.offWhite};
 	box-shadow: ${(props) => props.theme.bs};
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	max-height: 275px;
+	max-height: 350px;
 	img {
 		width: 100%;
 		height: 200px;
@@ -17,7 +17,7 @@ const Dog = styled.div`
 		font-size: 12px;
 		line-height: 0;
 		font-weight: 300;
-		flex-grow: 1;
+		flex-grow: 0;
 		padding: 0 1rem;
 		font-size: 1.5rem;
 	}
@@ -42,4 +42,4 @@ const Dog = styled.div`
 	}
 `;
 
-export default Dog;
+export default Pet;

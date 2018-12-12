@@ -4,10 +4,10 @@ import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Form from './styles/Form';
 import Error from './ErrorMessage';
-import { ALL_DOGS_QUERY } from './Dogs';
+import { ALL_PETS_QUERY } from './Pets';
 
-const CREATE_DOG_MUTATION = gql`
-	mutation CREATE_DOG_MUTATION(
+const CREATE_PET_MUTATION = gql`
+	mutation CREATE_PET_MUTATION(
 		$name: String!
 		$age: Int
 		$breed: String
@@ -16,7 +16,7 @@ const CREATE_DOG_MUTATION = gql`
 		$location: String
 		$shelter: String
 	) {
-		createDog(
+		createPet(
 			name: $name
 			age: $age
 			breed: $breed
@@ -30,10 +30,11 @@ const CREATE_DOG_MUTATION = gql`
 	}
 `;
 
-class CreateDog extends Component {
+class CreatePet extends Component {
 	state = {
 		name: '',
 		age: '',
+		gender: '',
 		breed: '',
 		image: '',
 		largeImage: '',
@@ -73,31 +74,31 @@ class CreateDog extends Component {
 	};
 
 	update = (cache, payload) => {
-		// deleteDog removes listing from the SERVER
+		// deletePet removes listing from the SERVER
 		// udate will update the cache to sync the client side
 		// 1. Read the cache
-		const data = cache.readQuery({ query: ALL_DOGS_QUERY });
+		const data = cache.readQuery({ query: ALL_PETS_QUERY });
 		console.log(data);
 
-		cache.writeQuery({ query: ALL_DOGS_QUERY, data });
+		cache.writeQuery({ query: ALL_PETS_QUERY, data });
 	};
 
 	render() {
 		return (
 			<Mutation
-				mutation={CREATE_DOG_MUTATION}
+				mutation={CREATE_PET_MUTATION}
 				variables={this.state}
 				update={this.update}
 			>
-				{(createDog, { loading, error }) => (
+				{(createPet, { loading, error }) => (
 					<Form
 						onSubmit={async (e) => {
 							e.preventDefault();
-							const res = await createDog();
+							const res = await createPet();
 							console.log(res);
 							Router.push({
 								pathname: '/pets',
-								query: { id: res.data.createDog.id }
+								query: { id: res.data.createPet.id }
 							});
 						}}
 					>
@@ -146,6 +147,18 @@ class CreateDog extends Component {
 									onChange={this.handleChange}
 								/>
 							</label>
+							{/* <label className="switch" htmlFor="breed">
+								Gender
+								<input
+									type="checkbox"
+									id="gender"
+									name="gender"
+									required
+									value={this.state.gender}
+									onChange={this.handleChange}
+								/>
+								<span class="slider round" />
+							</label> */}
 							<label htmlFor="breed">
 								Breed(s)
 								<input
@@ -179,5 +192,5 @@ class CreateDog extends Component {
 	}
 }
 
-export default CreateDog;
-export { CREATE_DOG_MUTATION };
+export default CreatePet;
+export { CREATE_PET_MUTATION };

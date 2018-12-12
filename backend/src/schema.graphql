@@ -1,7 +1,7 @@
 # import * from './generated/prisma.graphql'
 
 type Mutation {
-	createDog(
+	createPet(
 		name: String!
 		age: Int
 		breed: String
@@ -10,8 +10,8 @@ type Mutation {
 		largeImage: String
 		location: String
 		shelter: String
-	): Dog!
-	updateDog(
+	): Pet!
+	updatePet(
 		id: ID
 		name: String
 		age: Int
@@ -21,12 +21,17 @@ type Mutation {
 		largeImage: String
 		location: String
 		shelter: String
-	): Dog!
-	deleteDog(id: ID): Dog
+	): Pet!
+	deletePet(id: ID): Pet
 }
 
 type Query {
-	dogs: [Dog]
-	dog(where: DogWhereUniqueInput!): Dog
-	dogsConnection(where: DogWhereInput): DogConnection!
+	pets(
+		where: PetWhereInput
+		orderBy: PetOrderByInput
+		skip: Int
+		first: Int
+	): [Pet]!
+	pet(where: PetWhereUniqueInput!): Pet
+	petsConnection(where: PetWhereInput): PetConnection!
 }

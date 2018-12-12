@@ -1,10 +1,16 @@
-import Link from 'next/link';
-import Dogs from '../components/Dogs';
+/*
+	PetsPage is currently redundant as the Pets
+	component is currently the only component
+	in the root page
+*/
 
-const Pets = (props) => (
+import Link from 'next/link';
+import Pets from '../components/Pets';
+
+const PetsPage = (props) => (
 	<div>
-		<Dogs />
+		<Pets page={props.query.page || 1} />
 	</div>
 );
 
-export default Pets;
+export default PetsPage;

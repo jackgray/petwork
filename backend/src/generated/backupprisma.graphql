@@ -1,7 +1,7 @@
 # source: https://eu1.prisma.sh/jack-gray/petwork/dev
-# timestamp: Tue Dec 11 2018 22:32:10 GMT-0500 (Eastern Standard Time)
+# timestamp: Mon Dec 03 2018 14:26:21 GMT-0500 (Eastern Standard Time)
 
-type AggregatePet {
+type AggregateDog {
   count: Int!
 }
 
@@ -16,55 +16,7 @@ type BatchPayload {
 
 scalar DateTime
 
-"""
-The `Long` scalar type represents non-fractional signed whole numeric values.
-Long can represent values between -(2^63) and 2^63 - 1.
-"""
-scalar Long
-
-type Mutation {
-  createUser(data: UserCreateInput!): User!
-  createPet(data: PetCreateInput!): Pet!
-  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  updatePet(data: PetUpdateInput!, where: PetWhereUniqueInput!): Pet
-  deleteUser(where: UserWhereUniqueInput!): User
-  deletePet(where: PetWhereUniqueInput!): Pet
-  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
-  upsertPet(where: PetWhereUniqueInput!, create: PetCreateInput!, update: PetUpdateInput!): Pet!
-  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
-  updateManyPets(data: PetUpdateManyMutationInput!, where: PetWhereInput): BatchPayload!
-  deleteManyUsers(where: UserWhereInput): BatchPayload!
-  deleteManyPets(where: PetWhereInput): BatchPayload!
-}
-
-enum MutationType {
-  CREATED
-  UPDATED
-  DELETED
-}
-
-"""An object with an ID"""
-interface Node {
-  """The id of the object."""
-  id: ID!
-}
-
-"""Information about pagination in a connection."""
-type PageInfo {
-  """When paginating forwards, are there more items?"""
-  hasNextPage: Boolean!
-
-  """When paginating backwards, are there more items?"""
-  hasPreviousPage: Boolean!
-
-  """When paginating backwards, the cursor to continue."""
-  startCursor: String
-
-  """When paginating forwards, the cursor to continue."""
-  endCursor: String
-}
-
-type Pet implements Node {
+type Dog implements Node {
   id: ID!
   name: String!
   age: Int
@@ -79,16 +31,16 @@ type Pet implements Node {
 }
 
 """A connection to a list of items."""
-type PetConnection {
+type DogConnection {
   """Information to aid in pagination."""
   pageInfo: PageInfo!
 
   """A list of edges."""
-  edges: [PetEdge]!
-  aggregate: AggregatePet!
+  edges: [DogEdge]!
+  aggregate: AggregateDog!
 }
 
-input PetCreateInput {
+input DogCreateInput {
   name: String!
   age: Int
   breed: String
@@ -100,15 +52,15 @@ input PetCreateInput {
 }
 
 """An edge in a connection."""
-type PetEdge {
+type DogEdge {
   """The item at the end of the edge."""
-  node: Pet!
+  node: Dog!
 
   """A cursor for use in pagination."""
   cursor: String!
 }
 
-enum PetOrderByInput {
+enum DogOrderByInput {
   id_ASC
   id_DESC
   name_ASC
@@ -133,7 +85,7 @@ enum PetOrderByInput {
   updatedAt_DESC
 }
 
-type PetPreviousValues {
+type DogPreviousValues {
   id: ID!
   name: String!
   age: Int
@@ -147,22 +99,22 @@ type PetPreviousValues {
   updatedAt: DateTime!
 }
 
-type PetSubscriptionPayload {
+type DogSubscriptionPayload {
   mutation: MutationType!
-  node: Pet
+  node: Dog
   updatedFields: [String!]
-  previousValues: PetPreviousValues
+  previousValues: DogPreviousValues
 }
 
-input PetSubscriptionWhereInput {
+input DogSubscriptionWhereInput {
   """Logical AND on all given filters."""
-  AND: [PetSubscriptionWhereInput!]
+  AND: [DogSubscriptionWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [PetSubscriptionWhereInput!]
+  OR: [DogSubscriptionWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [PetSubscriptionWhereInput!]
+  NOT: [DogSubscriptionWhereInput!]
 
   """
   The subscription event gets dispatched when it's listed in mutation_in
@@ -183,10 +135,10 @@ input PetSubscriptionWhereInput {
   The subscription event gets only dispatched when some of the field names included in this list have been updated
   """
   updatedFields_contains_some: [String!]
-  node: PetWhereInput
+  node: DogWhereInput
 }
 
-input PetUpdateInput {
+input DogUpdateInput {
   name: String
   age: Int
   breed: String
@@ -197,7 +149,7 @@ input PetUpdateInput {
   shelter: String
 }
 
-input PetUpdateManyMutationInput {
+input DogUpdateManyMutationInput {
   name: String
   age: Int
   breed: String
@@ -208,15 +160,15 @@ input PetUpdateManyMutationInput {
   shelter: String
 }
 
-input PetWhereInput {
+input DogWhereInput {
   """Logical AND on all given filters."""
-  AND: [PetWhereInput!]
+  AND: [DogWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [PetWhereInput!]
+  OR: [DogWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [PetWhereInput!]
+  NOT: [DogWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -605,17 +557,65 @@ input PetWhereInput {
   updatedAt_gte: DateTime
 }
 
-input PetWhereUniqueInput {
+input DogWhereUniqueInput {
   id: ID
+}
+
+"""
+The `Long` scalar type represents non-fractional signed whole numeric values.
+Long can represent values between -(2^63) and 2^63 - 1.
+"""
+scalar Long
+
+type Mutation {
+  createUser(data: UserCreateInput!): User!
+  createDog(data: DogCreateInput!): Dog!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateDog(data: DogUpdateInput!, where: DogWhereUniqueInput!): Dog
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteDog(where: DogWhereUniqueInput!): Dog
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertDog(where: DogWhereUniqueInput!, create: DogCreateInput!, update: DogUpdateInput!): Dog!
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  updateManyDogs(data: DogUpdateManyMutationInput!, where: DogWhereInput): BatchPayload!
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyDogs(where: DogWhereInput): BatchPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
 }
 
 type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
-  pets(where: PetWhereInput, orderBy: PetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Pet]!
+  dogs(where: DogWhereInput, orderBy: DogOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Dog]!
   user(where: UserWhereUniqueInput!): User
-  pet(where: PetWhereUniqueInput!): Pet
+  dog(where: DogWhereUniqueInput!): Dog
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
-  petsConnection(where: PetWhereInput, orderBy: PetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PetConnection!
+  dogsConnection(where: DogWhereInput, orderBy: DogOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): DogConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -626,7 +626,7 @@ type Query {
 
 type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
-  pet(where: PetSubscriptionWhereInput): PetSubscriptionPayload
+  dog(where: DogSubscriptionWhereInput): DogSubscriptionPayload
 }
 
 type User implements Node {
