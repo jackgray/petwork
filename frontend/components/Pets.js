@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Pet from './Pet';
 import Pagination from './Pagination';
 import { perPage } from '../config';
+import { defaultCipherList } from 'constants';
 
 const ALL_PETS_QUERY = gql`
 	query ALL_PETS_QUERY($skip: Int = 0, $first: Int = ${perPage}) {
@@ -33,7 +34,12 @@ class Pets extends Component {
 		return (
 			<Center>
 				<Pagination page={this.props.page} />
-				<Query query={ALL_PETS_QUERY} variables={{ skip: 2, first: 4 }}>
+				<Query
+					query={ALL_PETS_QUERY}
+					variables={{
+						skip: this.props.page * perPage - perPage
+					}}
+				>
 					{({ data, error, loading }) => {
 						if (loading) return <p>Loading...</p>;
 						if (error) return <p>Error: {error.message}</p>;

@@ -8,6 +8,7 @@ import { ALL_PETS_QUERY } from './Pets';
 
 const CREATE_PET_MUTATION = gql`
 	mutation CREATE_PET_MUTATION(
+		$species: String
 		$name: String!
 		$age: Int
 		$breed: String
@@ -17,6 +18,7 @@ const CREATE_PET_MUTATION = gql`
 		$shelter: String
 	) {
 		createPet(
+			species: $species
 			name: $name
 			age: $age
 			breed: $breed
@@ -32,6 +34,7 @@ const CREATE_PET_MUTATION = gql`
 
 class CreatePet extends Component {
 	state = {
+		species: 'Dog',
 		name: '',
 		age: '',
 		gender: '',
@@ -85,11 +88,7 @@ class CreatePet extends Component {
 
 	render() {
 		return (
-			<Mutation
-				mutation={CREATE_PET_MUTATION}
-				variables={this.state}
-				update={this.update}
-			>
+			<Mutation mutation={CREATE_PET_MUTATION} variables={this.state}>
 				{(createPet, { loading, error }) => (
 					<Form
 						onSubmit={async (e) => {

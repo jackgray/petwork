@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/jack-gray/petwork/dev
-# timestamp: Tue Dec 11 2018 22:32:10 GMT-0500 (Eastern Standard Time)
+# timestamp: Tue Dec 18 2018 09:23:07 GMT-0500 (Eastern Standard Time)
 
 type AggregatePet {
   count: Int!
@@ -66,6 +66,7 @@ type PageInfo {
 
 type Pet implements Node {
   id: ID!
+  species: String
   name: String!
   age: Int
   breed: String
@@ -89,6 +90,7 @@ type PetConnection {
 }
 
 input PetCreateInput {
+  species: String
   name: String!
   age: Int
   breed: String
@@ -111,6 +113,8 @@ type PetEdge {
 enum PetOrderByInput {
   id_ASC
   id_DESC
+  species_ASC
+  species_DESC
   name_ASC
   name_DESC
   age_ASC
@@ -135,6 +139,7 @@ enum PetOrderByInput {
 
 type PetPreviousValues {
   id: ID!
+  species: String
   name: String!
   age: Int
   breed: String
@@ -187,6 +192,7 @@ input PetSubscriptionWhereInput {
 }
 
 input PetUpdateInput {
+  species: String
   name: String
   age: Int
   breed: String
@@ -198,6 +204,7 @@ input PetUpdateInput {
 }
 
 input PetUpdateManyMutationInput {
+  species: String
   name: String
   age: Int
   breed: String
@@ -257,6 +264,46 @@ input PetWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  species: String
+
+  """All values that are not equal to given value."""
+  species_not: String
+
+  """All values that are contained in given list."""
+  species_in: [String!]
+
+  """All values that are not contained in given list."""
+  species_not_in: [String!]
+
+  """All values less than the given value."""
+  species_lt: String
+
+  """All values less than or equal the given value."""
+  species_lte: String
+
+  """All values greater than the given value."""
+  species_gt: String
+
+  """All values greater than or equal the given value."""
+  species_gte: String
+
+  """All values containing the given string."""
+  species_contains: String
+
+  """All values not containing the given string."""
+  species_not_contains: String
+
+  """All values starting with the given string."""
+  species_starts_with: String
+
+  """All values not starting with the given string."""
+  species_not_starts_with: String
+
+  """All values ending with the given string."""
+  species_ends_with: String
+
+  """All values not ending with the given string."""
+  species_not_ends_with: String
   name: String
 
   """All values that are not equal to given value."""

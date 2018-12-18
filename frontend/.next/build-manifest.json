@@ -11,15 +11,19 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
+    "/pets": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
+    "/update": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
     "/index": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/adopt": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
-    "/pets": [
+    "/favorites": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
@@ -27,11 +31,11 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/add": [
+    "/about": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/favorites": [
+    "/contact": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],

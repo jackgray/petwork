@@ -2,6 +2,7 @@
 
 type Mutation {
 	createPet(
+		species: String
 		name: String!
 		age: Int
 		breed: String
@@ -13,6 +14,7 @@ type Mutation {
 	): Pet!
 	updatePet(
 		id: ID
+		species: String
 		name: String
 		age: Int
 		breed: String

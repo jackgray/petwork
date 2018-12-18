@@ -6,6 +6,7 @@ type User {
 
 type Pet {
 	id: ID! @unique
+	species: String
 	name: String!
 	age: Int
 	breed: String

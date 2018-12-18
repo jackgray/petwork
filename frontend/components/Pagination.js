@@ -23,7 +23,7 @@ const Pagination = (props) => (
 			if (loading) return <p>Loading...</p>;
 			const count = data.petsConnection.aggregate.count;
 			const pages = Math.ceil(count / perPage);
-			const page = props.page;
+			const page = parseInt(props.page, 10);
 
 			return (
 				<PaginationStyles>
@@ -44,7 +44,7 @@ const Pagination = (props) => (
 						</a>
 					</Link>
 					<p>
-						{props.page} of
+						{props.page} of{' '}
 						<span className="totalPages">{pages}</span>
 					</p>
 					<p>Showing {count} Results</p>
@@ -66,3 +66,4 @@ const Pagination = (props) => (
 );
 
 export default Pagination;
+export { PAGINATION_QUERY };

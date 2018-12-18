@@ -1,8 +1,8 @@
-import UpdateDog from '../components/UpdateDog';
+import UpdatePet from '../components/UpdatePet';
 
 const Update = ({ query }) => (
 	<div>
-		<UpdateDog id={query.id} />
+		<UpdatePet id={query.id} />
 	</div>
 );
 
