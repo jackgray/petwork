@@ -11,6 +11,7 @@ type User {
 	id: ID! @unique
 	name: String!
 	email: String
+	password: String
 	permissions: [Permission]
 	favorites: [FavoritePet]
 }
@@ -33,6 +34,7 @@ type Pet {
 
 type FavoritePet {
 	id: ID! @unique
+	quantity: Int! @default(value: 1)
 	pet: Pet
 	user: User!
 }

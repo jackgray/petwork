@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/jack-gray/petwork/dev
-# timestamp: Wed Dec 19 2018 11:08:50 GMT-0500 (Eastern Standard Time)
+# timestamp: Wed Dec 19 2018 12:22:39 GMT-0500 (Eastern Standard Time)
 
 type AggregateFavoritePet {
   count: Int!
@@ -22,6 +22,7 @@ scalar DateTime
 
 type FavoritePet implements Node {
   id: ID!
+  quantity: Int!
   pet: Pet
   user: User!
 }
@@ -37,6 +38,7 @@ type FavoritePetConnection {
 }
 
 input FavoritePetCreateInput {
+  quantity: Int
   pet: PetCreateOneInput
   user: UserCreateOneWithoutFavoritesInput!
 }
@@ -47,6 +49,7 @@ input FavoritePetCreateManyWithoutUserInput {
 }
 
 input FavoritePetCreateWithoutUserInput {
+  quantity: Int
   pet: PetCreateOneInput
 }
 
@@ -62,6 +65,8 @@ type FavoritePetEdge {
 enum FavoritePetOrderByInput {
   id_ASC
   id_DESC
+  quantity_ASC
+  quantity_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -70,6 +75,7 @@ enum FavoritePetOrderByInput {
 
 type FavoritePetPreviousValues {
   id: ID!
+  quantity: Int!
 }
 
 input FavoritePetScalarWhereInput {
@@ -121,6 +127,28 @@ input FavoritePetScalarWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  quantity: Int
+
+  """All values that are not equal to given value."""
+  quantity_not: Int
+
+  """All values that are contained in given list."""
+  quantity_in: [Int!]
+
+  """All values that are not contained in given list."""
+  quantity_not_in: [Int!]
+
+  """All values less than the given value."""
+  quantity_lt: Int
+
+  """All values less than or equal the given value."""
+  quantity_lte: Int
+
+  """All values greater than the given value."""
+  quantity_gt: Int
+
+  """All values greater than or equal the given value."""
+  quantity_gte: Int
 }
 
 type FavoritePetSubscriptionPayload {
@@ -163,8 +191,17 @@ input FavoritePetSubscriptionWhereInput {
 }
 
 input FavoritePetUpdateInput {
+  quantity: Int
   pet: PetUpdateOneInput
   user: UserUpdateOneRequiredWithoutFavoritesInput
+}
+
+input FavoritePetUpdateManyDataInput {
+  quantity: Int
+}
+
+input FavoritePetUpdateManyMutationInput {
+  quantity: Int
 }
 
 input FavoritePetUpdateManyWithoutUserInput {
@@ -173,11 +210,18 @@ input FavoritePetUpdateManyWithoutUserInput {
   disconnect: [FavoritePetWhereUniqueInput!]
   delete: [FavoritePetWhereUniqueInput!]
   update: [FavoritePetUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [FavoritePetUpdateManyWithWhereNestedInput!]
   deleteMany: [FavoritePetScalarWhereInput!]
   upsert: [FavoritePetUpsertWithWhereUniqueWithoutUserInput!]
 }
 
+input FavoritePetUpdateManyWithWhereNestedInput {
+  where: FavoritePetScalarWhereInput!
+  data: FavoritePetUpdateManyDataInput!
+}
+
 input FavoritePetUpdateWithoutUserDataInput {
+  quantity: Int
   pet: PetUpdateOneInput
 }
 
@@ -241,6 +285,28 @@ input FavoritePetWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  quantity: Int
+
+  """All values that are not equal to given value."""
+  quantity_not: Int
+
+  """All values that are contained in given list."""
+  quantity_in: [Int!]
+
+  """All values that are not contained in given list."""
+  quantity_not_in: [Int!]
+
+  """All values less than the given value."""
+  quantity_lt: Int
+
+  """All values less than or equal the given value."""
+  quantity_lte: Int
+
+  """All values greater than the given value."""
+  quantity_gt: Int
+
+  """All values greater than or equal the given value."""
+  quantity_gte: Int
   pet: PetWhereInput
   user: UserWhereInput
 }
@@ -268,6 +334,7 @@ type Mutation {
   upsertFavoritePet(where: FavoritePetWhereUniqueInput!, create: FavoritePetCreateInput!, update: FavoritePetUpdateInput!): FavoritePet!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertPet(where: PetWhereUniqueInput!, create: PetCreateInput!, update: PetUpdateInput!): Pet!
+  updateManyFavoritePets(data: FavoritePetUpdateManyMutationInput!, where: FavoritePetWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   updateManyPets(data: PetUpdateManyMutationInput!, where: PetWhereInput): BatchPayload!
   deleteManyFavoritePets(where: FavoritePetWhereInput): BatchPayload!
@@ -967,6 +1034,7 @@ type User implements Node {
   id: ID!
   name: String!
   email: String
+  password: String
   permissions: [Permission!]!
   favorites(where: FavoritePetWhereInput, orderBy: FavoritePetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FavoritePet!]
 }
@@ -984,6 +1052,7 @@ type UserConnection {
 input UserCreateInput {
   name: String!
   email: String
+  password: String
   permissions: UserCreatepermissionsInput
   favorites: FavoritePetCreateManyWithoutUserInput
 }
@@ -1005,6 +1074,7 @@ input UserCreatepermissionsInput {
 input UserCreateWithoutFavoritesInput {
   name: String!
   email: String
+  password: String
   permissions: UserCreatepermissionsInput
 }
 
@@ -1024,6 +1094,8 @@ enum UserOrderByInput {
   name_DESC
   email_ASC
   email_DESC
+  password_ASC
+  password_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -1034,6 +1106,7 @@ type UserPreviousValues {
   id: ID!
   name: String!
   email: String
+  password: String
   permissions: [Permission!]!
 }
 
@@ -1079,6 +1152,7 @@ input UserSubscriptionWhereInput {
 input UserUpdateDataInput {
   name: String
   email: String
+  password: String
   permissions: UserUpdatepermissionsInput
   favorites: FavoritePetUpdateManyWithoutUserInput
 }
@@ -1086,6 +1160,7 @@ input UserUpdateDataInput {
 input UserUpdateInput {
   name: String
   email: String
+  password: String
   permissions: UserUpdatepermissionsInput
   favorites: FavoritePetUpdateManyWithoutUserInput
 }
@@ -1093,6 +1168,7 @@ input UserUpdateInput {
 input UserUpdateManyMutationInput {
   name: String
   email: String
+  password: String
   permissions: UserUpdatepermissionsInput
 }
 
@@ -1119,6 +1195,7 @@ input UserUpdatepermissionsInput {
 input UserUpdateWithoutFavoritesDataInput {
   name: String
   email: String
+  password: String
   permissions: UserUpdatepermissionsInput
 }
 
@@ -1261,6 +1338,46 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   email_not_ends_with: String
+  password: String
+
+  """All values that are not equal to given value."""
+  password_not: String
+
+  """All values that are contained in given list."""
+  password_in: [String!]
+
+  """All values that are not contained in given list."""
+  password_not_in: [String!]
+
+  """All values less than the given value."""
+  password_lt: String
+
+  """All values less than or equal the given value."""
+  password_lte: String
+
+  """All values greater than the given value."""
+  password_gt: String
+
+  """All values greater than or equal the given value."""
+  password_gte: String
+
+  """All values containing the given string."""
+  password_contains: String
+
+  """All values not containing the given string."""
+  password_not_contains: String
+
+  """All values starting with the given string."""
+  password_starts_with: String
+
+  """All values not starting with the given string."""
+  password_not_starts_with: String
+
+  """All values ending with the given string."""
+  password_ends_with: String
+
+  """All values not ending with the given string."""
+  password_not_ends_with: String
   favorites_every: FavoritePetWhereInput
   favorites_some: FavoritePetWhereInput
   favorites_none: FavoritePetWhereInput
