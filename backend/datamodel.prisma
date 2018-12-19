@@ -1,7 +1,18 @@
+enum Permission {
+	ADMIN
+	USER
+	PETCREATE
+	PETUPDATE
+	PETDELETE
+	PERMISSIONUPDATE
+}
+
 type User {
 	id: ID! @unique
 	name: String!
 	email: String
+	permissions: [Permission]
+	favorites: [FavoritePet]
 }
 
 type Pet {
@@ -17,5 +28,11 @@ type Pet {
 	shelter: String
 	createdAt: DateTime!
 	updatedAt: DateTime!
-	#user: User!
+	user: User
+}
+
+type FavoritePet {
+	id: ID! @unique
+	pet: Pet
+	user: User!
 }

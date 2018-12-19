@@ -1,5 +1,9 @@
 # source: https://eu1.prisma.sh/jack-gray/petwork/dev
-# timestamp: Tue Dec 18 2018 09:23:07 GMT-0500 (Eastern Standard Time)
+# timestamp: Wed Dec 19 2018 11:08:50 GMT-0500 (Eastern Standard Time)
+
+type AggregateFavoritePet {
+  count: Int!
+}
 
 type AggregatePet {
   count: Int!
@@ -16,6 +20,235 @@ type BatchPayload {
 
 scalar DateTime
 
+type FavoritePet implements Node {
+  id: ID!
+  pet: Pet
+  user: User!
+}
+
+"""A connection to a list of items."""
+type FavoritePetConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [FavoritePetEdge]!
+  aggregate: AggregateFavoritePet!
+}
+
+input FavoritePetCreateInput {
+  pet: PetCreateOneInput
+  user: UserCreateOneWithoutFavoritesInput!
+}
+
+input FavoritePetCreateManyWithoutUserInput {
+  create: [FavoritePetCreateWithoutUserInput!]
+  connect: [FavoritePetWhereUniqueInput!]
+}
+
+input FavoritePetCreateWithoutUserInput {
+  pet: PetCreateOneInput
+}
+
+"""An edge in a connection."""
+type FavoritePetEdge {
+  """The item at the end of the edge."""
+  node: FavoritePet!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum FavoritePetOrderByInput {
+  id_ASC
+  id_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type FavoritePetPreviousValues {
+  id: ID!
+}
+
+input FavoritePetScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [FavoritePetScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [FavoritePetScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [FavoritePetScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+}
+
+type FavoritePetSubscriptionPayload {
+  mutation: MutationType!
+  node: FavoritePet
+  updatedFields: [String!]
+  previousValues: FavoritePetPreviousValues
+}
+
+input FavoritePetSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [FavoritePetSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [FavoritePetSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [FavoritePetSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: FavoritePetWhereInput
+}
+
+input FavoritePetUpdateInput {
+  pet: PetUpdateOneInput
+  user: UserUpdateOneRequiredWithoutFavoritesInput
+}
+
+input FavoritePetUpdateManyWithoutUserInput {
+  create: [FavoritePetCreateWithoutUserInput!]
+  connect: [FavoritePetWhereUniqueInput!]
+  disconnect: [FavoritePetWhereUniqueInput!]
+  delete: [FavoritePetWhereUniqueInput!]
+  update: [FavoritePetUpdateWithWhereUniqueWithoutUserInput!]
+  deleteMany: [FavoritePetScalarWhereInput!]
+  upsert: [FavoritePetUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input FavoritePetUpdateWithoutUserDataInput {
+  pet: PetUpdateOneInput
+}
+
+input FavoritePetUpdateWithWhereUniqueWithoutUserInput {
+  where: FavoritePetWhereUniqueInput!
+  data: FavoritePetUpdateWithoutUserDataInput!
+}
+
+input FavoritePetUpsertWithWhereUniqueWithoutUserInput {
+  where: FavoritePetWhereUniqueInput!
+  update: FavoritePetUpdateWithoutUserDataInput!
+  create: FavoritePetCreateWithoutUserInput!
+}
+
+input FavoritePetWhereInput {
+  """Logical AND on all given filters."""
+  AND: [FavoritePetWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [FavoritePetWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [FavoritePetWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  pet: PetWhereInput
+  user: UserWhereInput
+}
+
+input FavoritePetWhereUniqueInput {
+  id: ID
+}
+
 """
 The `Long` scalar type represents non-fractional signed whole numeric values.
 Long can represent values between -(2^63) and 2^63 - 1.
@@ -23,16 +256,21 @@ Long can represent values between -(2^63) and 2^63 - 1.
 scalar Long
 
 type Mutation {
+  createFavoritePet(data: FavoritePetCreateInput!): FavoritePet!
   createUser(data: UserCreateInput!): User!
   createPet(data: PetCreateInput!): Pet!
+  updateFavoritePet(data: FavoritePetUpdateInput!, where: FavoritePetWhereUniqueInput!): FavoritePet
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updatePet(data: PetUpdateInput!, where: PetWhereUniqueInput!): Pet
+  deleteFavoritePet(where: FavoritePetWhereUniqueInput!): FavoritePet
   deleteUser(where: UserWhereUniqueInput!): User
   deletePet(where: PetWhereUniqueInput!): Pet
+  upsertFavoritePet(where: FavoritePetWhereUniqueInput!, create: FavoritePetCreateInput!, update: FavoritePetUpdateInput!): FavoritePet!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertPet(where: PetWhereUniqueInput!, create: PetCreateInput!, update: PetUpdateInput!): Pet!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   updateManyPets(data: PetUpdateManyMutationInput!, where: PetWhereInput): BatchPayload!
+  deleteManyFavoritePets(where: FavoritePetWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyPets(where: PetWhereInput): BatchPayload!
 }
@@ -64,6 +302,15 @@ type PageInfo {
   endCursor: String
 }
 
+enum Permission {
+  ADMIN
+  USER
+  PETCREATE
+  PETUPDATE
+  PETDELETE
+  PERMISSIONUPDATE
+}
+
 type Pet implements Node {
   id: ID!
   species: String
@@ -77,6 +324,7 @@ type Pet implements Node {
   shelter: String
   createdAt: DateTime!
   updatedAt: DateTime!
+  user: User
 }
 
 """A connection to a list of items."""
@@ -99,6 +347,12 @@ input PetCreateInput {
   largeImage: String
   location: String
   shelter: String
+  user: UserCreateOneInput
+}
+
+input PetCreateOneInput {
+  create: PetCreateInput
+  connect: PetWhereUniqueInput
 }
 
 """An edge in a connection."""
@@ -191,6 +445,19 @@ input PetSubscriptionWhereInput {
   node: PetWhereInput
 }
 
+input PetUpdateDataInput {
+  species: String
+  name: String
+  age: Int
+  breed: String
+  gender: String
+  image: String
+  largeImage: String
+  location: String
+  shelter: String
+  user: UserUpdateOneInput
+}
+
 input PetUpdateInput {
   species: String
   name: String
@@ -201,6 +468,7 @@ input PetUpdateInput {
   largeImage: String
   location: String
   shelter: String
+  user: UserUpdateOneInput
 }
 
 input PetUpdateManyMutationInput {
@@ -213,6 +481,20 @@ input PetUpdateManyMutationInput {
   largeImage: String
   location: String
   shelter: String
+}
+
+input PetUpdateOneInput {
+  create: PetCreateInput
+  connect: PetWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: PetUpdateDataInput
+  upsert: PetUpsertNestedInput
+}
+
+input PetUpsertNestedInput {
+  update: PetUpdateDataInput!
+  create: PetCreateInput!
 }
 
 input PetWhereInput {
@@ -650,6 +932,7 @@ input PetWhereInput {
 
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
+  user: UserWhereInput
 }
 
 input PetWhereUniqueInput {
@@ -657,10 +940,13 @@ input PetWhereUniqueInput {
 }
 
 type Query {
+  favoritePets(where: FavoritePetWhereInput, orderBy: FavoritePetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FavoritePet]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   pets(where: PetWhereInput, orderBy: PetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Pet]!
+  favoritePet(where: FavoritePetWhereUniqueInput!): FavoritePet
   user(where: UserWhereUniqueInput!): User
   pet(where: PetWhereUniqueInput!): Pet
+  favoritePetsConnection(where: FavoritePetWhereInput, orderBy: FavoritePetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FavoritePetConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   petsConnection(where: PetWhereInput, orderBy: PetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PetConnection!
 
@@ -672,6 +958,7 @@ type Query {
 }
 
 type Subscription {
+  favoritePet(where: FavoritePetSubscriptionWhereInput): FavoritePetSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   pet(where: PetSubscriptionWhereInput): PetSubscriptionPayload
 }
@@ -680,6 +967,8 @@ type User implements Node {
   id: ID!
   name: String!
   email: String
+  permissions: [Permission!]!
+  favorites(where: FavoritePetWhereInput, orderBy: FavoritePetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FavoritePet!]
 }
 
 """A connection to a list of items."""
@@ -695,6 +984,28 @@ type UserConnection {
 input UserCreateInput {
   name: String!
   email: String
+  permissions: UserCreatepermissionsInput
+  favorites: FavoritePetCreateManyWithoutUserInput
+}
+
+input UserCreateOneInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutFavoritesInput {
+  create: UserCreateWithoutFavoritesInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreatepermissionsInput {
+  set: [Permission!]
+}
+
+input UserCreateWithoutFavoritesInput {
+  name: String!
+  email: String
+  permissions: UserCreatepermissionsInput
 }
 
 """An edge in a connection."""
@@ -723,6 +1034,7 @@ type UserPreviousValues {
   id: ID!
   name: String!
   email: String
+  permissions: [Permission!]!
 }
 
 type UserSubscriptionPayload {
@@ -764,14 +1076,60 @@ input UserSubscriptionWhereInput {
   node: UserWhereInput
 }
 
+input UserUpdateDataInput {
+  name: String
+  email: String
+  permissions: UserUpdatepermissionsInput
+  favorites: FavoritePetUpdateManyWithoutUserInput
+}
+
 input UserUpdateInput {
   name: String
   email: String
+  permissions: UserUpdatepermissionsInput
+  favorites: FavoritePetUpdateManyWithoutUserInput
 }
 
 input UserUpdateManyMutationInput {
   name: String
   email: String
+  permissions: UserUpdatepermissionsInput
+}
+
+input UserUpdateOneInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: UserUpdateDataInput
+  upsert: UserUpsertNestedInput
+}
+
+input UserUpdateOneRequiredWithoutFavoritesInput {
+  create: UserCreateWithoutFavoritesInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutFavoritesDataInput
+  upsert: UserUpsertWithoutFavoritesInput
+}
+
+input UserUpdatepermissionsInput {
+  set: [Permission!]
+}
+
+input UserUpdateWithoutFavoritesDataInput {
+  name: String
+  email: String
+  permissions: UserUpdatepermissionsInput
+}
+
+input UserUpsertNestedInput {
+  update: UserUpdateDataInput!
+  create: UserCreateInput!
+}
+
+input UserUpsertWithoutFavoritesInput {
+  update: UserUpdateWithoutFavoritesDataInput!
+  create: UserCreateWithoutFavoritesInput!
 }
 
 input UserWhereInput {
@@ -903,6 +1261,9 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   email_not_ends_with: String
+  favorites_every: FavoritePetWhereInput
+  favorites_some: FavoritePetWhereInput
+  favorites_none: FavoritePetWhereInput
 }
 
 input UserWhereUniqueInput {
