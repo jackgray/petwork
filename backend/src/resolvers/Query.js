@@ -27,27 +27,44 @@ const Query = {
 		// 3. query all users if user has ADMIN privileges
 		return ctx.db.query.users({}, info);
 	},
-	async favorites(parents, args, ctx, info) {
+
+	async favoritePet(parents, args, ctx, info) {
 		// 1. Authorize loggin
 		if (!ctx.request.userId) {
 			throw new Error('You arent logged in!');
 		}
 		// 2. Query list of favorites
-		const favorites = await ctx.db.query.favorites(
+		const { favoritePet } = await ctx.db.query.favoritePet(
 			{
 				where: { id: args.id }
 			},
 			info
 		);
 		// 3. Check if user has permissions
-		const ownsFavorites = favorites.user.id === ctx.request.userId;
-		const hasFavoritesPermission = ctx.request.user.permissions.inclues(
+		const ownsFavorites = favoritePet.user.id === ctx.request.userId;
+		const hasFavoritesPermission = ctx.request.user.permissions.includes(
 			'ADMIN'
 		);
 		if (!ownsFavorites || !hasPermission) {
 			throw new Error('You do not have permission');
 		}
-		return favorites;
+		return favorite;
+	},
+
+	async favoritePets(parents, args, ctx, info) {
+		const { userId } = ctx.request;
+		const { favoritePets } = await ctx.db.query;
+		if (!userId) {
+			throw new Error('You must log in to view favorites');
+		}
+		return favoritePets(
+			{
+				where: {
+					user: { id: userId }
+				}
+			},
+			info
+		);
 	}
 };
 

@@ -10,10 +10,11 @@ enum Permission {
 type User {
 	id: ID! @unique
 	name: String!
-	email: String
+	email: String! @unique
 	password: String
 	permissions: [Permission]
-	favorites: [FavoritePet]
+	favoritePets: [FavoritePet]
+	pets: [Pet]
 }
 
 type Pet {

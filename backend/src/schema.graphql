@@ -43,8 +43,8 @@ type Query {
 	petsConnection(where: PetWhereInput): PetConnection!
 	me: User
 	users: [User]!
-	favorite(id: ID!): FavoritePet
-	favorites(orderBy: FavoritePetOrderByInput): [FavoritePet]!
+	favoritePet(id: ID!): FavoritePet
+	favoritePets(orderBy: FavoritePetOrderByInput): [FavoritePet]!
 }
 
 type User {
@@ -52,5 +52,5 @@ type User {
 	name: String!
 	email: String!
 	permissions: [Permission!]!
-	favorites: [FavoritePet]
+	favoritePets: [FavoritePet]
 }

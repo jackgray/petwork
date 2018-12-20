@@ -1,5 +1,12 @@
-import Link from 'next/link';
+import React from 'react';
+import Favorites from '../components/Favorites';
 
-const Favorites = (props) => <div />;
+const FavoritesPage = (props) => {
+	return (
+		<div>
+			<Favorites />
+		</div>
+	);
+};
 
-export default Favorites;
+export default FavoritesPage;

@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/jack-gray/petwork/dev
-# timestamp: Wed Dec 19 2018 12:22:39 GMT-0500 (Eastern Standard Time)
+# timestamp: Thu Dec 20 2018 12:59:15 GMT-0500 (Eastern Standard Time)
 
 type AggregateFavoritePet {
   count: Int!
@@ -40,7 +40,7 @@ type FavoritePetConnection {
 input FavoritePetCreateInput {
   quantity: Int
   pet: PetCreateOneInput
-  user: UserCreateOneWithoutFavoritesInput!
+  user: UserCreateOneWithoutFavoritePetsInput!
 }
 
 input FavoritePetCreateManyWithoutUserInput {
@@ -193,7 +193,7 @@ input FavoritePetSubscriptionWhereInput {
 input FavoritePetUpdateInput {
   quantity: Int
   pet: PetUpdateOneInput
-  user: UserUpdateOneRequiredWithoutFavoritesInput
+  user: UserUpdateOneRequiredWithoutFavoritePetsInput
 }
 
 input FavoritePetUpdateManyDataInput {
@@ -1033,10 +1033,10 @@ type Subscription {
 type User implements Node {
   id: ID!
   name: String!
-  email: String
+  email: String!
   password: String
   permissions: [Permission!]!
-  favorites(where: FavoritePetWhereInput, orderBy: FavoritePetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FavoritePet!]
+  favoritePets(where: FavoritePetWhereInput, orderBy: FavoritePetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FavoritePet!]
 }
 
 """A connection to a list of items."""
@@ -1051,10 +1051,10 @@ type UserConnection {
 
 input UserCreateInput {
   name: String!
-  email: String
+  email: String!
   password: String
   permissions: UserCreatepermissionsInput
-  favorites: FavoritePetCreateManyWithoutUserInput
+  favoritePets: FavoritePetCreateManyWithoutUserInput
 }
 
 input UserCreateOneInput {
@@ -1062,8 +1062,8 @@ input UserCreateOneInput {
   connect: UserWhereUniqueInput
 }
 
-input UserCreateOneWithoutFavoritesInput {
-  create: UserCreateWithoutFavoritesInput
+input UserCreateOneWithoutFavoritePetsInput {
+  create: UserCreateWithoutFavoritePetsInput
   connect: UserWhereUniqueInput
 }
 
@@ -1071,9 +1071,9 @@ input UserCreatepermissionsInput {
   set: [Permission!]
 }
 
-input UserCreateWithoutFavoritesInput {
+input UserCreateWithoutFavoritePetsInput {
   name: String!
-  email: String
+  email: String!
   password: String
   permissions: UserCreatepermissionsInput
 }
@@ -1105,7 +1105,7 @@ enum UserOrderByInput {
 type UserPreviousValues {
   id: ID!
   name: String!
-  email: String
+  email: String!
   password: String
   permissions: [Permission!]!
 }
@@ -1154,7 +1154,7 @@ input UserUpdateDataInput {
   email: String
   password: String
   permissions: UserUpdatepermissionsInput
-  favorites: FavoritePetUpdateManyWithoutUserInput
+  favoritePets: FavoritePetUpdateManyWithoutUserInput
 }
 
 input UserUpdateInput {
@@ -1162,7 +1162,7 @@ input UserUpdateInput {
   email: String
   password: String
   permissions: UserUpdatepermissionsInput
-  favorites: FavoritePetUpdateManyWithoutUserInput
+  favoritePets: FavoritePetUpdateManyWithoutUserInput
 }
 
 input UserUpdateManyMutationInput {
@@ -1181,18 +1181,18 @@ input UserUpdateOneInput {
   upsert: UserUpsertNestedInput
 }
 
-input UserUpdateOneRequiredWithoutFavoritesInput {
-  create: UserCreateWithoutFavoritesInput
+input UserUpdateOneRequiredWithoutFavoritePetsInput {
+  create: UserCreateWithoutFavoritePetsInput
   connect: UserWhereUniqueInput
-  update: UserUpdateWithoutFavoritesDataInput
-  upsert: UserUpsertWithoutFavoritesInput
+  update: UserUpdateWithoutFavoritePetsDataInput
+  upsert: UserUpsertWithoutFavoritePetsInput
 }
 
 input UserUpdatepermissionsInput {
   set: [Permission!]
 }
 
-input UserUpdateWithoutFavoritesDataInput {
+input UserUpdateWithoutFavoritePetsDataInput {
   name: String
   email: String
   password: String
@@ -1204,9 +1204,9 @@ input UserUpsertNestedInput {
   create: UserCreateInput!
 }
 
-input UserUpsertWithoutFavoritesInput {
-  update: UserUpdateWithoutFavoritesDataInput!
-  create: UserCreateWithoutFavoritesInput!
+input UserUpsertWithoutFavoritePetsInput {
+  update: UserUpdateWithoutFavoritePetsDataInput!
+  create: UserCreateWithoutFavoritePetsInput!
 }
 
 input UserWhereInput {
@@ -1378,11 +1378,12 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   password_not_ends_with: String
-  favorites_every: FavoritePetWhereInput
-  favorites_some: FavoritePetWhereInput
-  favorites_none: FavoritePetWhereInput
+  favoritePets_every: FavoritePetWhereInput
+  favoritePets_some: FavoritePetWhereInput
+  favoritePets_none: FavoritePetWhereInput
 }
 
 input UserWhereUniqueInput {
   id: ID
+  email: String
 }

@@ -41,14 +41,28 @@ const Mutations = {
 		return ctx.db.mutation.deletePet({ where }, info);
 	},
 	async signup(parent, args, ctx, info) {
+		// convert email to lowercase
+		args.email = args.email.toLowerCase();
+		// hash password
+		const password = await bcrypt.hash(args.password, 10);
+		// createUser in db
 		const user = await ctx.db.mutation.createUser(
 			{
 				data: {
-					...args
+					...args,
+					password,
+					permissions: { set: [ 'USER' ] }
 				}
 			},
 			info
 		);
+		// generate a JWT for user auth
+		const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
+		// set token as a cookie in res object
+		ctx.response.cookie('token', token, {
+			httpOnly: true,
+			maxAge: 1000 * 60 * 60 * 24 * 265 // 1 year
+		});
 		return user;
 	},
 	async signin(parent, { email, password }, ctx, info) {
