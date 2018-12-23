@@ -28,8 +28,7 @@ type Mutation {
 	signup(name: String!, email: String!, password: String!): User!
 	signin(email: String!, password: String!): User!
 	updatePermissions(permissions: [Permission], userId: ID!): User
-	addFavorite(id: ID!): FavoritePet
-	removeFavorite(id: ID!): FavoritePet
+	addFavorite(id: ID): User
 }
 
 type Query {
@@ -43,8 +42,8 @@ type Query {
 	petsConnection(where: PetWhereInput): PetConnection!
 	me: User
 	users: [User]!
-	favoritePet(id: ID!): FavoritePet
-	favoritePets(orderBy: FavoritePetOrderByInput): [FavoritePet]!
+	favorite: Pet
+	favorites: [Pet]
 }
 
 type User {
@@ -52,5 +51,5 @@ type User {
 	name: String!
 	email: String!
 	permissions: [Permission!]!
-	favoritePets: [FavoritePet]
+	favorites: [Pet]
 }

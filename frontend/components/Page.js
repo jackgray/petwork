@@ -4,13 +4,13 @@ import Meta from '../components/Meta';
 import styled, { ThemeProvider, injectGlobal } from 'styled-components';
 
 const theme = {
-	red: '#FF0000',
+	red: '#38a8ff',
 	black: '#393939',
 	grey: '#3A3A3A',
 	lightgrey: '#E1E1E1',
 	lightblue: '#54dfff',
 	torquiose: '#3dfff2',
-	lightRed: '#ff5959',
+	lightRed: '#38a8ff',
 	offWhite: '#fcfcfc',
 	cream: '#fffdf2',
 	maxWidth: '1000px',

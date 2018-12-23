@@ -6,21 +6,21 @@ import styled from 'styled-components';
 import Pagination from './Pagination';
 import { perPage } from '../config';
 import User from './User';
+import Pet from './Pet';
+import Pets from './Pets';
 import CartStyles from './styles/CartStyles';
+import { link } from 'next/link';
 
 const FAVORITE_PETS_QUERY = gql`
 	query FAVORITE_PETS_QUERY {
-		favoritePets(orderBy: createdAt_DESC) {
-			id
-			user {
+		me {
+			favorites {
 				id
-			}
-			pet {
-				id
-				species
 				name
+				image
 				breed
 				age
+				location
 			}
 		}
 	}
@@ -56,7 +56,6 @@ class Favorites extends Component {
 	render() {
 		return (
 			<Center>
-				<Pagination page={this.props.page} />
 				<Query
 					query={FAVORITE_PETS_QUERY}
 					variables={
@@ -69,21 +68,18 @@ class Favorites extends Component {
 					{({ data, error, loading }) => {
 						if (loading) return <p>Loading...</p>;
 						if (error) return <p>Error: {error.message}</p>;
-						const favoritePets = data.favoritePets;
+						const favorites = data.me.favorites;
 						console.log('loading favorite pets...');
+						console.log(favorites.id);
 						return (
 							<PetsList>
-								{favoritePets.pet.map((pet) => (
-									<Pet
-										pet={favoritePets.pet}
-										key={favoritePets.pet.id}
-									/>
+								{favorites.map((pet) => (
+									<Pet pet={pet} key={pet.id} />
 								))}
 							</PetsList>
 						);
 					}}
 				</Query>
-				<Pagination page={this.props.page} />
 			</Center>
 		);
 	}

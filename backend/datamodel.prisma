@@ -13,8 +13,8 @@ type User {
 	email: String! @unique
 	password: String
 	permissions: [Permission]
-	favoritePets: [FavoritePet]
-	pets: [Pet]
+	listings: [Pet] @relation(name: "UserCreatePetRelation")
+	favorites: [Pet] @relation(name: "UserFavoriteRelation")
 }
 
 type Pet {
@@ -30,12 +30,6 @@ type Pet {
 	shelter: String
 	createdAt: DateTime!
 	updatedAt: DateTime!
-	user: User
-}
-
-type FavoritePet {
-	id: ID! @unique
-	quantity: Int! @default(value: 1)
-	pet: Pet
-	user: User!
+	createdBy: User @relation(name: "UserCreatePetRelation")
+	favoritedBy: User @relation(name: "UserFavoriteRelation")
 }

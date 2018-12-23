@@ -93,38 +93,18 @@ const Mutations = {
 		if (!userId) {
 			throw new Error('Sign in or create an account to save favorites.');
 		}
-		// 2. Query the users favorites
-		const [ existingFavoritePet ] = await ctx.db.query.favoritePets({
-			where: {
-				user: { id: userId },
-				pet: { id: args.id }
-			}
-		});
-		// 3. Check if pet is already added to favorites. If so, increment by 1
-		if (existingFavoritePet) {
-			console.log('This pet is already saved to favorites');
-			return ctx.db.mutation.updateFavoritePet(
-				{
-					where: { id: existingFavoritePet.id },
-					data: { quantity: existingFavoritePet.quantity + 1 }
-				},
-				info
-			);
-		}
-		// 4. if pet not added as favorite, create connection
-		return ctx.db.mutation.createFavoritePet(
-			{
-				data: {
-					user: {
-						connect: { id: userId }
-					},
-					pet: {
-						connect: { id: args.id }
+		return ctx.db.mutation.updatePet({
+			data: {
+				favoritedBy: {
+					connect: {
+						id: userId
 					}
 				}
 			},
-			info
-		);
+			where: {
+				id: args.id
+			}
+		});
 	}
 };
 
