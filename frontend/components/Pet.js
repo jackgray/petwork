@@ -6,6 +6,7 @@ import PetStyles from './styles/PetStyles';
 import PriceTag from './styles/PriceTag';
 import DeletePet from './DeletePet';
 import AddFavorite from './AddFavorite';
+import RemoveFavorite from './RemoveFavorite';
 
 class Pet extends Component {
 	render() {
@@ -46,6 +47,7 @@ class Pet extends Component {
 						<a>✏️</a>
 					</Link>
 					<AddFavorite id={pet.id}>❤️</AddFavorite>
+					<RemoveFavorite id={pet.id}>💔</RemoveFavorite>
 					<DeletePet id={pet.id}>✖️</DeletePet>
 				</div>
 			</PetStyles>

@@ -93,7 +93,8 @@ const Mutations = {
 		if (!userId) {
 			throw new Error('Sign in or create an account to save favorites.');
 		}
-		return ctx.db.mutation.updatePet({
+
+		connect = await ctx.db.mutation.updatePet({
 			data: {
 				favoritedBy: {
 					connect: {
@@ -105,6 +106,30 @@ const Mutations = {
 				id: args.id
 			}
 		});
+
+		return connect;
+	},
+	async removeFavorite(parent, args, ctx, info) {
+		// 1. Check permissions
+		const { userId } = ctx.request;
+		if (!userId) {
+			throw new Error('Sign in or create an account to save favorites.');
+		}
+
+		disconnect = await ctx.db.mutation.updatePet({
+			data: {
+				favoritedBy: {
+					disconnect: {
+						id: userId
+					}
+				}
+			},
+			where: {
+				id: args.id
+			}
+		});
+
+		return disconnect;
 	}
 };
 
