@@ -7,7 +7,7 @@ const { hasPermission } = require('../utils');
 const Mutations = {
 	async createPet(parent, args, ctx, info) {
 		// TODO: check if user is logged in
-
+		const { userId } = ctx.request;
 		const pet = await ctx.db.mutation.createPet(
 			{
 				data: {
@@ -130,6 +130,45 @@ const Mutations = {
 		});
 
 		return disconnect;
+	},
+
+	async toggleFavorite(parent, args, ctx, info) {
+		const { userId } = ctx.request;
+		if (!userId) {
+			throw new Error('You must be signed in');
+		}
+
+		me = await ctx.db.query.me({
+			data: {
+				favorites: {
+					where: {
+						id: pet.id
+					}
+				}
+			}
+		});
+
+		const exists = userId;
+
+		connect = await ctx.db.mutation.updatePet({
+			where: {
+				id: args.id
+			},
+			data: {
+				favoritedBy: {
+					connect: { id: userId }
+				}
+			}
+		});
+		disconnect = await ctx.db.mutation.updatePet({
+			where: { id: args.id },
+			data: {
+				favoritedBy: {
+					disconnect: { id: userId }
+				}
+			}
+		});
+		return null;
 	}
 };
 

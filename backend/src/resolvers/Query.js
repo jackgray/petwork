@@ -53,18 +53,34 @@ const Query = {
 
 	async favorites(parents, args, ctx, info) {
 		const { userId } = ctx.request;
-		const { pets } = await ctx.db.query;
+
 		if (!userId) {
 			throw new Error('You must log in to view favorites');
 		}
-		return pets(
+
+		const favorites = await ctx.db.query.pets({
+			where: {
+				favoritedBy: {
+					id: userId
+				}
+			},
+			info
+		});
+		return favorites;
+	},
+
+	async owner(parents, args, ctx, info) {
+		owner = await ctx.db.query.pet(
 			{
-				// where: {
-				// 	favoritedBy: { id: userId }
-				// }
+				where: {
+					owner: {
+						id: userId
+					}
+				}
 			},
 			info
 		);
+		return owner;
 	}
 };
 

@@ -45,9 +45,9 @@ const Pagination = (props) => (
 					</Link>
 					<p>
 						{props.page} of{' '}
-						<span className="totalPages">{pages}</span>
+						<span className="totalPages">{pages}</span> pages
 					</p>
-					<p>Showing {count} Results</p>
+					<p> {count} Total</p>
 					<Link
 						prefetch
 						href={{

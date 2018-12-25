@@ -30,6 +30,6 @@ type Pet {
 	shelter: String
 	createdAt: DateTime!
 	updatedAt: DateTime!
-	createdBy: User @relation(name: "UserCreatePetRelation")
+	owner: User @relation(name: "UserCreatePetRelation")
 	favoritedBy: User @relation(name: "UserFavoriteRelation")
 }

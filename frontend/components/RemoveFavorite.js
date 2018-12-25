@@ -13,21 +13,37 @@ const REMOVE_FAVORITE_MUTATION = gql`
 `;
 
 class RemoveFavorite extends Component {
+	update = (cache, payload) => {
+		console.log('update function called');
+		const data = cache.readQuery({ query: FAVORITE_PETS_QUERY });
+		console.log(data);
+		data.me.favorites = data.me.favorites.filter(
+			(favorite) => favorite.id !== payload.data.removeFavorite.id
+		);
+
+		cache.writeQuery({ query: FAVORITE_PETS_QUERY, data });
+	};
 	render() {
-		const { id } = this.props;
+		const id = this.props.id;
 		return (
 			<Mutation
 				mutation={REMOVE_FAVORITE_MUTATION}
 				variables={{ id }}
-				refetchQueries={[
-					{ query: CURRENT_USER_QUERY },
-					{ query: FAVORITE_PETS_QUERY }
-				]}
+				update={this.update}
 			>
-				{(removeFavorite, { loading }) => (
-					<button disabled={loading} onClick={removeFavorite}>
+				{(removeFavorite, { error }) => (
+					<button
+						onClick={() => {
+							if (
+								confirm(
+									'Are you sure you want to unfavorite this pet?'
+								)
+							) {
+								removeFavorite();
+							}
+						}}
+					>
 						{this.props.children}
-						{loading && 'ing'}
 					</button>
 				)}
 			</Mutation>

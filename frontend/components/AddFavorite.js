@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import { CURRENT_USER_QUERY } from './User';
+import { FAVORITE_PETS_QUERY } from './Favorites';
 
 const ADD_FAVORITE_MUTATION = gql`
 	mutation addFavorite($id: ID!) {
@@ -18,7 +19,9 @@ class AddFavorite extends Component {
 			<Mutation
 				mutation={ADD_FAVORITE_MUTATION}
 				variables={{ id }}
-				refetchQueries={[ { query: CURRENT_USER_QUERY } ]}
+				refetchQueries={[
+					{ query: CURRENT_USER_QUERY, FAVORITE_PETS_QUERY }
+				]}
 			>
 				{(addFavorite, { loading }) => (
 					<button disabled={loading} onClick={addFavorite}>
