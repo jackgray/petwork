@@ -17,6 +17,7 @@ const NavStyles = styled.ul`
 		font-size: 1em;
 		background: none;
 		border: 0;
+
 		cursor: pointer;
 		@media (max-width: 700px) {
 			font-size: 10px;
@@ -29,7 +30,7 @@ const NavStyles = styled.ul`
 			height: 100%;
 			left: 0;
 			position: absolute;
-			transform: skew(-10deg);
+
 			top: 0;
 			bottom: 0;
 		}

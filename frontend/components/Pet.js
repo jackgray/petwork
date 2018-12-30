@@ -44,7 +44,7 @@ class Pet extends Component {
 							query: { id: pet.id }
 						}}
 					>
-						<a>✏️</a>
+						<h6>✏️</h6>
 					</Link>
 					<AddFavorite id={pet.id}>❤️</AddFavorite>
 					<RemoveFavorite id={pet.id}>💔</RemoveFavorite>

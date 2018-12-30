@@ -1,5 +1,4 @@
-// creates HOC that makes apollo-client available
-// via a prop
+// makes apollo-client available via props
 import withApollo from 'next-with-apollo';
 import ApolloClient from 'apollo-boost';
 import { endpoint } from '../config';
@@ -8,8 +7,7 @@ function createClient({ headers }) {
 	return new ApolloClient({
 		uri:
 
-				process.env.NODE_ENV ===
-				'development' ? endpoint :
+				process.env.NODE_ENV === 'development' ? endpoint :
 				endpoint,
 		request: (operation) => {
 			operation.setContext({

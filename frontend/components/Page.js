@@ -4,13 +4,15 @@ import Meta from '../components/Meta';
 import styled, { ThemeProvider, injectGlobal } from 'styled-components';
 
 const theme = {
+	primary: '#38a8ff',
+	secondary: '#42ffc6',
 	red: '#38a8ff',
 	black: '#393939',
 	grey: '#3A3A3A',
 	lightgrey: '#E1E1E1',
 	lightblue: '#54dfff',
 	torquiose: '#3dfff2',
-	lightRed: '#38a8ff',
+	lightRed: '#ff4635',
 	offWhite: '#fcfcfc',
 	cream: '#fffdf2',
 	maxWidth: '1000px',
@@ -30,11 +32,11 @@ const Inner = styled.div`
 `;
 
 injectGlobal`
+	@import url('https://fonts.googleapis.com/css?family=Cabin+Sketch');
+
 	@font-face {
-		font-family: 'radnika_next';
-		src: url('/static/radnikanext-medium-webfont.woff2') format('woff2');
-		font-weight: normal;
-		font-style: light;
+		font-family: 'Cabin Sketch';
+
 	}
 	html {
 		box-sizing: border-box;
@@ -46,13 +48,14 @@ injectGlobal`
 	body {
 		padding: 0;
 		margin: 0;
-		font-size: 1.5rem;
+		font-size: 1.75rem;
 		line-height: 2;
-		font-family: 'radnika_next';
+		font-family: 'Cabin Sketch';
 	}
 	a {
 		text-decoration: none;
 		color: ${theme.black}
+		font-size: 2rem;
 	}
 `;
 
